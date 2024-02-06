@@ -9,10 +9,11 @@ while ! nc -z kafka 9092; do
 done 
 echo "Kafka is now ready!"
 
-kafka-topics --bootstrap-server kafka:9092 \
+docker exec exploring-kafka-1 \
+  kafka-topics --bootstrap-server kafka:9092 \
     --topic vehicle-positions \
     --create \
-    --partitions 6 \
+    --partitions 1 \
     --replication-factor 1
 
 docker container run -d \
